@@ -934,10 +934,17 @@ def discover_profiles(
     model_dir: Path,
     formal_lines: Sequence[FormalLine],
 ) -> List[ProfileEntry]:
-    """Discover every OUT file, whether or not the line is active in FORMAL_INPUT."""
+    """Discover every OUT file and sort the panels from blue to red.
+
+    Sorting is based on the central wavelength of the wavelength grid in each
+    actual OUT file, rather than on FORMAL_INPUT order. This also places OUT
+    profiles without a FORMAL_INPUT definition at their natural wavelength.
+    If a profile cannot be read while determining the order, it is placed at
+    the end and will still raise the usual informative error when plotted.
+    """
     formal_by_upper = {line.name.upper(): line for line in formal_lines}
-    order = {line.name.upper(): i for i, line in enumerate(formal_lines)}
     selected: List[ProfileEntry] = []
+
     for path in sorted(model_dir.glob("OUT.*")):
         if not path.is_file():
             continue
@@ -948,8 +955,20 @@ def discover_profiles(
             path=path,
             formal_line=formal_by_upper.get(line_name.upper()),
         ))
+
+    def central_wavelength(entry: ProfileEntry) -> float:
+        try:
+            wave = read_out_profile(entry.path).wavelength
+        except (OSError, ValueError):
+            return float("inf")
+        if wave.size == 0:
+            return float("inf")
+        # Midpoint of the actual wavelength coverage; unlike FORMAL_INPUT this
+        # remains defined for every valid OUT file.
+        return 0.5 * (float(wave[0]) + float(wave[-1]))
+
     selected.sort(key=lambda e: (
-        order.get(e.line_name.upper(), 10**9), e.line_name.upper(), e.suffix.upper()
+        central_wavelength(e), e.line_name.upper(), e.suffix.upper()
     ))
     return selected
 
