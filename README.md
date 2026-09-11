@@ -1,5 +1,7 @@
 # FW_plot
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22706437.svg)](https://doi.org/10.5281/zenodo.22706437)
+
 A standalone Python command-line utility for plotting **FASTWIND** line profiles and model diagnostics.
 
 The script reads an existing FASTWIND model directory, produces a line-profile overview, and produces a model-diagnostics overview. The line profiles can optionally be processed to mimic an observation through rotational broadening, instrumental broadening, detector sampling, and noise.
@@ -134,6 +136,14 @@ See [`examples/README.md`](examples/README.md) for a compact description of the 
 Diagnostic panels are created from whichever relevant FASTWIND files are present, including files such as `TAU_ROS`, `TEMP`, `MODEL`, `CLUMPING_OUTPUT`, `FLUXCONT`, `CONVERG`, `CONVERG_METALS`, `MAXTCORR.dat`, and `GRAD.OUT`. Missing diagnostic inputs are handled gracefully where possible.
 
 The script is intended as a practical plotting/inspection tool for FASTWIND model output rather than as part of the FASTWIND distribution itself.
+
+## Citation
+
+If you use **FW_plot** in your work, please cite the software release:
+
+> Tramper, F. (2026). *FW_plot* (v1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.22706437
+
+GitHub also provides citation metadata through [`CITATION.cff`](CITATION.cff).
 
 ## License
 
