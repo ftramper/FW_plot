@@ -9,7 +9,7 @@ This repository contains only the plotting utility and example output; it does *
 ## Features
 
 - Reads stellar, wind, abundance, and clumping parameters from `INDAT.DAT`.
-- Discovers available `OUT.*` line-profile files automatically.
+- Discovers available `OUT.*` line-profile files automatically and sorts the panels from blue to red using the wavelength coverage of each profile.
 - Reads active and commented line definitions from `FORMAL_INPUT` for component markers.
 - Uses FASTWIND atomic data, when available, to mark individual line components.
 - Plots model diagnostics from available FASTWIND output files.
@@ -73,11 +73,11 @@ where:
 Examples:
 
 ```bash
-python plot_fw_model.py T40g37R15N60
-python plot_fw_model.py T40g37R15N60 7500
-python plot_fw_model.py T40g37R15N60 7500 100
-python plot_fw_model.py T40g37R15N60 7500 100 150
-python plot_fw_model.py T40g37R15N60 7500 100 150 --seed 12345
+python plot_fw_model.py O9V
+python plot_fw_model.py O9V 7500
+python plot_fw_model.py O9V 7500 85
+python plot_fw_model.py O9V 7500 85 100
+python plot_fw_model.py O9V 7500 85 100 --seed 4039807730
 ```
 
 The synthetic-observation processing is:
@@ -99,26 +99,35 @@ Each run writes a line-profile PDF and, when diagnostic files are available, a d
 Examples of output filenames are:
 
 ```text
-T40g37R15N60_line_profiles.pdf
-T40g37R15N60_line_profiles_R7500_vsini100.pdf
-T40g37R15N60_line_profiles_R7500_vsini100_SNR150.pdf
-T40g37R15N60_model_diagnostics.pdf
+O9V_line_profiles.pdf
+O9V_line_profiles_R7500.pdf
+O9V_line_profiles_R7500_vsini85.pdf
+O9V_line_profiles_R7500_vsini85_SNR100.pdf
+O9V_model_diagnostics.pdf
 ```
 
 The exact line-profile filename reflects the processing options that were enabled.
 
 ## Example output
 
-The repository includes two example PDFs for the model `T40g37R15N60`:
+The [`examples`](examples/) directory contains a sequence for the same `O9V` FASTWIND model, chosen to show the effect of each optional synthetic-observation step separately:
 
-- [`T40g37R15N60_line_profiles_R7500_vsini100.pdf`](examples/T40g37R15N60_line_profiles_R7500_vsini100.pdf) — line-profile overview for `R = 7500`, `v sin i = 100 km/s`, without added noise.
-- [`T40g37R15N60_model_diagnostics.pdf`](examples/T40g37R15N60_model_diagnostics.pdf) — model structure and convergence diagnostics.
+- [`O9V_line_profiles.pdf`](examples/O9V_line_profiles.pdf) — intrinsic FASTWIND profiles.
+- [`O9V_line_profiles_R7500.pdf`](examples/O9V_line_profiles_R7500.pdf) — instrumental broadening to `R = 7500`.
+- [`O9V_line_profiles_R7500_vsini85.pdf`](examples/O9V_line_profiles_R7500_vsini85.pdf) — `R = 7500` plus `v sin i = 85 km/s` rotational broadening.
+- [`O9V_line_profiles_R7500_vsini85_SNR100.pdf`](examples/O9V_line_profiles_R7500_vsini85_SNR100.pdf) — the same processed spectrum with continuum `S/N = 100` per displayed pixel. The stored example uses seed `4039807730`.
+- [`O9V_model_diagnostics.pdf`](examples/O9V_model_diagnostics.pdf) — model structure, clumping, flux conservation, convergence, and radiative-acceleration diagnostics for the same model.
 
-The line-profile example corresponds to:
+The four line-profile examples can be reproduced with:
 
 ```bash
-python plot_fw_model.py T40g37R15N60 7500 100
+python plot_fw_model.py O9V
+python plot_fw_model.py O9V 7500
+python plot_fw_model.py O9V 7500 85
+python plot_fw_model.py O9V 7500 85 100 --seed 4039807730
 ```
+
+See [`examples/README.md`](examples/README.md) for a compact description of the sequence.
 
 ## Notes
 
