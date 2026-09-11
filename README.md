@@ -128,4 +128,4 @@ The script is intended as a practical plotting/inspection tool for FASTWIND mode
 
 ## License
 
-Add an open-source license before public release. For a small scientific utility like this, the MIT license is a simple permissive choice, provided it is compatible with any FASTWIND-project or institutional requirements.
+This project is released under the MIT License. See [LICENSE](LICENSE) for details.
