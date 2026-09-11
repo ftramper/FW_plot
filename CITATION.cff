@@ -7,6 +7,7 @@ authors:
     given-names: "Frank"
 repository-code: "https://github.com/ftramper/FW_plot"
 url: "https://github.com/ftramper/FW_plot"
+doi: "10.5281/zenodo.22706437"
 license: MIT
 version: "1.0.0"
 date-released: "2026-09-11"
@@ -21,3 +22,12 @@ keywords:
   - spectroscopy
   - astronomy
   - Python
+preferred-citation:
+  type: software
+  title: "FW_plot"
+  authors:
+    - family-names: "Tramper"
+      given-names: "Frank"
+  version: "1.0.0"
+  date-released: "2026-09-11"
+  doi: "10.5281/zenodo.22706437"
