@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "FW_plot"
+type: software
+authors:
+  - family-names: "Tramper"
+    given-names: "Frank"
+repository-code: "https://github.com/ftramper/FW_plot"
+url: "https://github.com/ftramper/FW_plot"
+license: MIT
+version: "1.0.0"
+date-released: "2026-09-11"
+abstract: >-
+  A standalone Python command-line utility for plotting FASTWIND line profiles
+  and model diagnostics, with optional rotational broadening, instrumental
+  broadening, detector sampling, and synthetic noise.
+keywords:
+  - FASTWIND
+  - massive stars
+  - stellar atmospheres
+  - spectroscopy
+  - astronomy
+  - Python
